@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Experience — Your Name</title>
+  <title>Experience — Wenxin Zeng</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -27,7 +27,7 @@
       font-weight: 300;
     }
 
-    /* ── NAV ── */
+    /* NAV */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
@@ -50,7 +50,7 @@
     }
     .nav-links a:hover, .nav-links a.active { color: var(--sage); }
 
-    /* ── PAGE HEADER ── */
+    /* PAGE HEADER */
     .page-header {
       padding: 10rem 3rem 3rem;
       max-width: 860px; margin: 0 auto;
@@ -65,7 +65,7 @@
       color: var(--forest); line-height: 1.1;
     }
 
-    /* ── SECTION TABS ── */
+    /* TABS */
     .tabs {
       display: flex; gap: 0.5rem;
       max-width: 860px; margin: 0 auto;
@@ -83,7 +83,7 @@
     .tab-btn:hover { border-color: var(--sage); color: var(--sage); }
     .tab-btn.active { background: var(--forest); border-color: var(--forest); color: var(--ivory); }
 
-    /* ── TIMELINE ── */
+    /* TIMELINE */
     .timeline-section { display: none; }
     .timeline-section.active { display: block; }
 
@@ -92,7 +92,6 @@
       padding: 0 3rem 6rem;
       position: relative;
     }
-    /* vertical line */
     .timeline::before {
       content: '';
       position: absolute;
@@ -112,30 +111,25 @@
     }
     .timeline-item.visible { opacity: 1; transform: translateY(0); }
 
-    /* logo column */
+    /* logo */
     .timeline-logo {
       width: 56px; height: 56px;
       border-radius: 50%;
       border: 1.5px solid var(--tan);
       background: var(--ivory-mid);
       display: flex; align-items: center; justify-content: center;
-      overflow: hidden;
-      flex-shrink: 0;
+      overflow: hidden; flex-shrink: 0;
       position: relative; z-index: 1;
     }
-    .timeline-logo img {
-      width: 36px; height: 36px; object-fit: contain;
-    }
+    .timeline-logo img { width: 36px; height: 36px; object-fit: contain; }
     .timeline-logo .logo-placeholder {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem; font-weight: 600;
-      color: var(--forest);
+      font-size: 1rem; font-weight: 600; color: var(--forest);
+      text-align: center; line-height: 1.1; padding: 0 4px;
     }
 
-    /* content column */
-    .timeline-content {
-      padding-top: 0.3rem;
-    }
+    /* content */
+    .timeline-content { padding-top: 0.3rem; }
     .timeline-meta {
       display: flex; align-items: center; gap: 0.8rem;
       margin-bottom: 0.4rem; flex-wrap: wrap;
@@ -144,27 +138,34 @@
       font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
       color: var(--sage); white-space: nowrap;
     }
-    .timeline-dot {
-      width: 3px; height: 3px; border-radius: 50%;
-      background: var(--tan); flex-shrink: 0;
-    }
-    .timeline-company {
-      font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--text-muted);
-    }
+    .timeline-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--tan); flex-shrink: 0; }
+    .timeline-company { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
+    .timeline-location { font-size: 0.68rem; color: var(--text-muted); font-style: italic; }
+
     .timeline-role {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.35rem; font-weight: 400;
       color: var(--forest); margin-bottom: 0.7rem; line-height: 1.2;
     }
-    .timeline-desc {
-      font-size: 0.88rem; line-height: 1.75;
-      color: var(--text-muted); margin-bottom: 1rem;
-      max-width: 560px;
+
+    /* bullet points */
+    .timeline-bullets {
+      list-style: none; margin-bottom: 1rem;
     }
-    .timeline-tags {
-      display: flex; flex-wrap: wrap; gap: 0.45rem;
+    .timeline-bullets li {
+      font-size: 0.86rem; line-height: 1.75;
+      color: var(--text-muted);
+      padding-left: 1rem; position: relative;
+      margin-bottom: 0.35rem;
     }
+    .timeline-bullets li::before {
+      content: '·';
+      position: absolute; left: 0;
+      color: var(--sage); font-size: 1.1rem; line-height: 1.6;
+    }
+
+    /* skill tags */
+    .timeline-tags { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.8rem; }
     .tag {
       background: var(--ivory-mid);
       border: 1px solid var(--tan);
@@ -173,17 +174,32 @@
       font-size: 0.67rem; letter-spacing: 0.06em;
       color: var(--text-muted);
     }
+    .tag.highlight {
+      background: rgba(74,124,89,0.1);
+      border-color: var(--sage-light);
+      color: var(--sage);
+    }
 
-    /* education uses same cards but slightly different accent */
-    .edu .timeline-date { color: var(--tan); }
-    .edu .timeline-role { color: var(--forest); }
+    /* GPA badge */
+    .gpa-badge {
+      display: inline-block;
+      background: var(--forest);
+      color: var(--ivory);
+      font-size: 0.65rem; letter-spacing: 0.1em;
+      padding: 0.15rem 0.55rem; border-radius: 2px;
+      margin-right: 0.4rem; vertical-align: middle;
+    }
+
+    /* education note */
+    .edu-note {
+      font-size: 0.82rem; color: var(--text-muted);
+      line-height: 1.6; margin-bottom: 0.8rem;
+    }
 
     footer {
-      text-align: center;
-      padding: 2rem;
+      text-align: center; padding: 2rem;
       font-size: 0.7rem; letter-spacing: 0.1em;
-      color: var(--tan);
-      border-top: 1px solid var(--ivory-mid);
+      color: var(--tan); border-top: 1px solid var(--ivory-mid);
     }
 
     @media (max-width: 600px) {
@@ -196,7 +212,7 @@
 <body>
 
   <nav>
-    <a class="nav-logo" href="index.html">YN</a>
+    <a class="nav-logo" href="index.html">WZ</a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="experience.html" class="active">Experience</a></li>
@@ -206,87 +222,234 @@
 
   <header class="page-header">
     <p class="page-header-eyebrow">My Journey</p>
-    <h1>Education &<br>Work Experience</h1>
+    <h1>Education, Work<br>& Projects</h1>
   </header>
 
-  <!-- Tab switcher -->
   <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab('work')">Work</button>
-    <button class="tab-btn" onclick="switchTab('education')">Education</button>
+    <button class="tab-btn active" onclick="switchTab('work', this)">Work</button>
+    <button class="tab-btn" onclick="switchTab('education', this)">Education</button>
+    <button class="tab-btn" onclick="switchTab('projects', this)">Projects</button>
   </div>
 
-  <!-- ── WORK TIMELINE ── -->
+  <!-- ══════════════════════════════════
+       WORK
+  ══════════════════════════════════ -->
   <section class="timeline-section active" id="work">
     <div class="timeline">
 
-      <!-- ✏️ ENTRY 1 — Most recent first -->
+      <!-- Villa of Hope -->
       <div class="timeline-item">
         <div class="timeline-logo">
-          <!-- Option A: use your own image -->
-          <!-- <img src="logos/company1.png" alt="Company 1"> -->
-          <!-- Option B: placeholder initials -->
-          <span class="logo-placeholder">C1</span>
+          <!-- <img src="logos/villa-of-hope.png" alt="Villa of Hope"> -->
+          <span class="logo-placeholder">VH</span>
         </div>
         <div class="timeline-content">
           <div class="timeline-meta">
-            <span class="timeline-date">Jan 2023 — Present</span>
+            <span class="timeline-date">Feb 2025 — Present</span>
             <span class="timeline-dot"></span>
-            <span class="timeline-company">Company Name</span>
+            <span class="timeline-company">Villa of Hope</span>
+            <span class="timeline-dot"></span>
+            <span class="timeline-location">Rochester, NY</span>
           </div>
-          <h2 class="timeline-role">Your Job Title</h2>
-          <p class="timeline-desc">
-            Describe what you did in this role. Focus on impact and outcomes rather than duties.
-            What did you build, improve, or lead? 2–3 sentences works well here.
-          </p>
+          <h2 class="timeline-role">Financial Reporting Analyst</h2>
+          <ul class="timeline-bullets">
+            <li>Built Power BI & SQL dashboards for 20+ program directors, cutting expenses 12% and boosting revenue attainment 19% YoY.</li>
+            <li>Prepared regulatory reports for OASAS and OMH; reduced recoupment liability by $500K through precise cost reconciliation.</li>
+            <li>Automated financial report compilation with Power Query and Pivot Tables, cutting preparation time by 80%.</li>
+          </ul>
           <div class="timeline-tags">
-            <span class="tag">Keyword 1</span>
-            <span class="tag">Keyword 2</span>
-            <span class="tag">Keyword 3</span>
+            <span class="tag highlight">Power BI</span>
+            <span class="tag highlight">SQL</span>
+            <span class="tag highlight">Power Query</span>
+            <span class="tag">Financial Reporting</span>
+            <span class="tag">Variance Analysis</span>
+            <span class="tag">Regulatory Compliance</span>
           </div>
         </div>
       </div>
 
-      <!-- ✏️ ENTRY 2 -->
+      <!-- The Resource Group -->
       <div class="timeline-item">
         <div class="timeline-logo">
-          <span class="logo-placeholder">C2</span>
+          <span class="logo-placeholder">TRG</span>
         </div>
         <div class="timeline-content">
           <div class="timeline-meta">
-            <span class="timeline-date">Jun 2020 — Dec 2022</span>
+            <span class="timeline-date">May 2024 — Aug 2024</span>
             <span class="timeline-dot"></span>
-            <span class="timeline-company">Previous Company</span>
+            <span class="timeline-company">The Resource Group</span>
+            <span class="timeline-dot"></span>
+            <span class="timeline-location">Remote</span>
           </div>
-          <h2 class="timeline-role">Previous Role</h2>
-          <p class="timeline-desc">
-            What you accomplished here. Keep it concise and achievement-oriented.
-          </p>
+          <h2 class="timeline-role">Strategic Support & Analytics Intern</h2>
+          <ul class="timeline-bullets">
+            <li>Supported financial analysis of $5M in IT contracts for the National IT Contracting team.</li>
+            <li>Mapped cross-departmental contracting processes across 8 departments via 17 stakeholder interviews.</li>
+            <li>Built a VBA-automated reporting template that reduced cycle time by 10 minutes per contracting request.</li>
+            <li>Integrated 183K lines of EHR and purchase order data using BigQuery and Excel to support Ascension supply chain initiatives.</li>
+          </ul>
           <div class="timeline-tags">
-            <span class="tag">Keyword A</span>
-            <span class="tag">Keyword B</span>
+            <span class="tag highlight">VBA</span>
+            <span class="tag highlight">BigQuery</span>
+            <span class="tag highlight">Excel</span>
+            <span class="tag">Process Mapping</span>
+            <span class="tag">Supply Chain Analytics</span>
           </div>
         </div>
       </div>
 
-      <!-- ✏️ ENTRY 3 — duplicate block as needed -->
+      <!-- Industrial Securities -->
       <div class="timeline-item">
         <div class="timeline-logo">
-          <span class="logo-placeholder">C3</span>
+          <span class="logo-placeholder">IS</span>
         </div>
         <div class="timeline-content">
           <div class="timeline-meta">
-            <span class="timeline-date">2018 — 2020</span>
+            <span class="timeline-date">May 2023 — Jul 2023</span>
             <span class="timeline-dot"></span>
-            <span class="timeline-company">Earlier Company</span>
+            <span class="timeline-company">Industrial Securities</span>
+            <span class="timeline-dot"></span>
+            <span class="timeline-location">Shanghai, China</span>
           </div>
-          <h2 class="timeline-role">Earlier Role</h2>
-          <p class="timeline-desc">
-            Brief description of your responsibilities and achievements.
-          </p>
+          <h2 class="timeline-role">Investment Banking Intern</h2>
+          <ul class="timeline-bullets">
+            <li>Conducted due diligence on client financials — evaluating health, market position, and growth potential — to support securities issuance.</li>
+            <li>Applied sampling techniques to verify compliance and accuracy of financial records at scale.</li>
+          </ul>
           <div class="timeline-tags">
-            <span class="tag">Tag 1</span>
-            <span class="tag">Tag 2</span>
-            <span class="tag">Tag 3</span>
+            <span class="tag">Due Diligence</span>
+            <span class="tag">Financial Auditing</span>
+            <span class="tag">Securities Issuance</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Allkinds -->
+      <div class="timeline-item">
+        <div class="timeline-logo">
+          <span class="logo-placeholder">AK</span>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-meta">
+            <span class="timeline-date">Nov 2022 — May 2023</span>
+            <span class="timeline-dot"></span>
+            <span class="timeline-company">Allkinds</span>
+            <span class="timeline-dot"></span>
+            <span class="timeline-location">Canberra, Australia</span>
+          </div>
+          <h2 class="timeline-role">Sales Associate</h2>
+          <ul class="timeline-bullets">
+            <li>Analyzed sales trends and customer behavior to surface upselling and cross-selling opportunities.</li>
+            <li>Weekly performance reporting drove a 7% increase in average transaction value.</li>
+          </ul>
+          <div class="timeline-tags">
+            <span class="tag">Sales Analytics</span>
+            <span class="tag">Customer Insights</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Azure Group -->
+      <div class="timeline-item">
+        <div class="timeline-logo">
+          <span class="logo-placeholder">AG</span>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-meta">
+            <span class="timeline-date">Nov 2021 — Feb 2022</span>
+            <span class="timeline-dot"></span>
+            <span class="timeline-company">Azure Group</span>
+            <span class="timeline-dot"></span>
+            <span class="timeline-location">Shanghai, China</span>
+          </div>
+          <h2 class="timeline-role">Accounting Intern</h2>
+          <ul class="timeline-bullets">
+            <li>Prepared 12 reports on tax reforms and policy updates; reduced client reporting errors by 15%.</li>
+            <li>Analyzed monthly financial statements to detect discrepancies and ensure reporting accuracy.</li>
+          </ul>
+          <div class="timeline-tags">
+            <span class="tag">Financial Statements</span>
+            <span class="tag">Tax Research</span>
+            <span class="tag">Reporting</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Publicis Groupe -->
+      <div class="timeline-item">
+        <div class="timeline-logo">
+          <span class="logo-placeholder">PG</span>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-meta">
+            <span class="timeline-date">Jun 2021 — Sep 2021</span>
+            <span class="timeline-dot"></span>
+            <span class="timeline-company">Publicis Groupe</span>
+            <span class="timeline-dot"></span>
+            <span class="timeline-location">Shanghai, China</span>
+          </div>
+          <h2 class="timeline-role">E-Commerce Intern</h2>
+          <ul class="timeline-bullets">
+            <li>Managed 30+ campaign metrics; optimized real-time bidding to improve CTR by 28.4% while cutting CPC by 30%.</li>
+            <li>Led A/B testing on Ferrero's New Product Launch creatives, achieving 48.1% ROI improvement YoY.</li>
+          </ul>
+          <div class="timeline-tags">
+            <span class="tag">Paid Media</span>
+            <span class="tag">A/B Testing</span>
+            <span class="tag">Campaign Analytics</span>
+            <span class="tag">RTB Optimization</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Beijing Century Law Firm -->
+      <div class="timeline-item">
+        <div class="timeline-logo">
+          <span class="logo-placeholder">BCL</span>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-meta">
+            <span class="timeline-date">Jul 2020 — Mar 2021</span>
+            <span class="timeline-dot"></span>
+            <span class="timeline-company">Beijing Century Law Firm</span>
+            <span class="timeline-dot"></span>
+            <span class="timeline-location">Shanghai, China</span>
+          </div>
+          <h2 class="timeline-role">Paralegal Intern</h2>
+          <ul class="timeline-bullets">
+            <li>Assisted on cross-border M&A cases — transaction structure design, corporate governance, and shareholder agreements.</li>
+            <li>Supported business negotiations for luxury retailer market strategy adjustments in Hong Kong.</li>
+          </ul>
+          <div class="timeline-tags">
+            <span class="tag">M&A</span>
+            <span class="tag">Legal Documentation</span>
+            <span class="tag">Corporate Governance</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Huachuang Securities -->
+      <div class="timeline-item">
+        <div class="timeline-logo">
+          <span class="logo-placeholder">HS</span>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-meta">
+            <span class="timeline-date">Nov 2019 — Feb 2020</span>
+            <span class="timeline-dot"></span>
+            <span class="timeline-company">Huachuang Securities</span>
+            <span class="timeline-dot"></span>
+            <span class="timeline-location">Shanghai, China</span>
+          </div>
+          <h2 class="timeline-role">Real Estate Research Intern</h2>
+          <ul class="timeline-bullets">
+            <li>Researched national real estate market trends and produced macro industry and company-level research reports.</li>
+            <li>Assessed policy impact on target companies and contributed daily market reports.</li>
+          </ul>
+          <div class="timeline-tags">
+            <span class="tag">Industry Research</span>
+            <span class="tag">Market Analysis</span>
+            <span class="tag">Report Writing</span>
           </div>
         </div>
       </div>
@@ -294,50 +457,77 @@
     </div>
   </section>
 
-  <!-- ── EDUCATION TIMELINE ── -->
-  <section class="timeline-section edu" id="education">
+  <!-- ══════════════════════════════════
+       EDUCATION
+  ══════════════════════════════════ -->
+  <section class="timeline-section" id="education">
     <div class="timeline">
 
-      <!-- ✏️ EDUCATION ENTRY 1 -->
+      <!-- Simon Business School -->
       <div class="timeline-item">
         <div class="timeline-logo">
-          <!-- <img src="logos/university1.png" alt="University"> -->
-          <span class="logo-placeholder">U1</span>
+          <span class="logo-placeholder">UR</span>
         </div>
         <div class="timeline-content">
           <div class="timeline-meta">
-            <span class="timeline-date">2016 — 2020</span>
+            <span class="timeline-date">2023 — Dec 2024</span>
             <span class="timeline-dot"></span>
-            <span class="timeline-company">University Name</span>
+            <span class="timeline-company">Simon Business School, University of Rochester</span>
           </div>
-          <h2 class="timeline-role">Bachelor of ___</h2>
-          <p class="timeline-desc">
-            Major / specialization. Any honors, thesis topic, or relevant activities worth mentioning.
+          <h2 class="timeline-role">MS in Business Analytics <span style="font-size:0.9rem; font-style:italic; color:var(--text-muted);">(STEM-Certified)</span></h2>
+          <p class="edu-note">
+            <span class="gpa-badge">GPA 3.78</span>
+            Fall 2023 Dean's List · Due Diligence Analyst, Simon School Venture Fund
           </p>
           <div class="timeline-tags">
-            <span class="tag">Major Topic</span>
+            <span class="tag highlight">Business Analytics</span>
+            <span class="tag">Venture Fund</span>
             <span class="tag">Dean's List</span>
+            <span class="tag">STEM</span>
           </div>
         </div>
       </div>
 
-      <!-- ✏️ EDUCATION ENTRY 2 -->
+      <!-- ANU -->
       <div class="timeline-item">
         <div class="timeline-logo">
-          <span class="logo-placeholder">U2</span>
+          <span class="logo-placeholder">ANU</span>
         </div>
         <div class="timeline-content">
           <div class="timeline-meta">
-            <span class="timeline-date">2020 — 2022</span>
+            <span class="timeline-date">— Dec 2022</span>
             <span class="timeline-dot"></span>
-            <span class="timeline-company">Another Institution</span>
+            <span class="timeline-company">Australian National University</span>
+            <span class="timeline-dot"></span>
+            <span class="timeline-location">Canberra, Australia</span>
           </div>
-          <h2 class="timeline-role">Master of ___</h2>
-          <p class="timeline-desc">
-            Description of program and key learnings or projects.
+          <h2 class="timeline-role">Bachelor of Finance</h2>
+          <p class="edu-note">
+            <span class="gpa-badge">GPA 3.25</span>
+            Student Ambassador · Marketing Officer, Chinese Business Collaboration
           </p>
           <div class="timeline-tags">
-            <span class="tag">Specialization</span>
+            <span class="tag highlight">Finance</span>
+            <span class="tag">Student Ambassador</span>
+            <span class="tag">Marketing</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Qualifications -->
+      <div class="timeline-item">
+        <div class="timeline-logo">
+          <span class="logo-placeholder">🏅</span>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-meta">
+            <span class="timeline-date">Certifications</span>
+          </div>
+          <h2 class="timeline-role">Professional Qualifications</h2>
+          <div class="timeline-tags">
+            <span class="tag highlight">ACCA (F1–F5)</span>
+            <span class="tag highlight">Tableau Desktop Specialist</span>
+            <span class="tag highlight">Lean Six Sigma White Belt</span>
           </div>
         </div>
       </div>
@@ -345,27 +535,229 @@
     </div>
   </section>
 
-  <footer>© 2025 Your Name &nbsp;·&nbsp; Built with GitHub Pages</footer>
+  <!-- ══════════════════════════════════
+       PROJECTS
+  ══════════════════════════════════ -->
+  <section class="timeline-section" id="projects">
+    <div class="timeline">
+
+      <!-- GHR Hotels -->
+      <div class="timeline-item">
+        <div class="timeline-logo">
+          <span class="logo-placeholder">RIT</span>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-meta">
+            <span class="timeline-date">2024</span>
+            <span class="timeline-dot"></span>
+            <span class="timeline-company">RIT Business Analytics Competition</span>
+          </div>
+          <h2 class="timeline-role">Operation Enhancement for GHR Hotels</h2>
+          <ul class="timeline-bullets">
+            <li>Analyzed 94K order records to model the impact of free upgrades, cancellations, and dynamic pricing on retention and revenue.</li>
+            <li>Built a predictive model in R to estimate upgrade probability, informing strategic decisions on customer satisfaction.</li>
+          </ul>
+          <div class="timeline-tags">
+            <span class="tag highlight">R</span>
+            <span class="tag">Predictive Modeling</span>
+            <span class="tag">Dynamic Pricing</span>
+            <span class="tag">Statistical Analysis</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pierre Fabre -->
+      <div class="timeline-item">
+        <div class="timeline-logo">
+          <span class="logo-placeholder">PF</span>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-meta">
+            <span class="timeline-date">2024</span>
+            <span class="timeline-dot"></span>
+            <span class="timeline-company">Pierre Fabre · Avène</span>
+          </div>
+          <h2 class="timeline-role">Strategic Market Expansion — U.S. Skincare</h2>
+          <ul class="timeline-bullets">
+            <li>Conducted qualitative and quantitative research on the U.S. dermo-cosmetic landscape.</li>
+            <li>Proposed 3 strategic approaches driving a $44K increase in sales order volume.</li>
+          </ul>
+          <div class="timeline-tags">
+            <span class="tag">Market Research</span>
+            <span class="tag">Marketing Strategy</span>
+            <span class="tag">Consumer Insights</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stromer / Deloitte -->
+      <div class="timeline-item">
+        <div class="timeline-logo">
+          <span class="logo-placeholder">DL</span>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-meta">
+            <span class="timeline-date">2024</span>
+            <span class="timeline-dot"></span>
+            <span class="timeline-company">Stromer · Deloitte</span>
+          </div>
+          <h2 class="timeline-role">U.S. Market Entry Strategy — E-Bike Industry</h2>
+          <ul class="timeline-bullets">
+            <li>Developed a market entry strategy for a European e-bike pioneer entering the U.S., projecting 15% order growth.</li>
+            <li>Proposed 3 revenue diversification approaches through thorough market and client analysis.</li>
+          </ul>
+          <div class="timeline-tags">
+            <span class="tag">Market Entry</span>
+            <span class="tag">Competitive Analysis</span>
+            <span class="tag">Revenue Strategy</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- KPMG / Sprocket Central -->
+      <div class="timeline-item">
+        <div class="timeline-logo">
+          <span class="logo-placeholder">KP</span>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-meta">
+            <span class="timeline-date">2023</span>
+            <span class="timeline-dot"></span>
+            <span class="timeline-company">Sprocket Central · KPMG</span>
+          </div>
+          <h2 class="timeline-role">Consumer Insights & Targeting Analysis</h2>
+          <ul class="timeline-bullets">
+            <li>Assessed data quality and explored 1K+ consumer profiles and transaction records to identify high-value customer segments.</li>
+            <li>Built a Tableau dashboard for multi-dimensional visual analysis supporting the marketing targeting strategy.</li>
+          </ul>
+          <div class="timeline-tags">
+            <span class="tag highlight">R</span>
+            <span class="tag highlight">Tableau</span>
+            <span class="tag">Data Quality</span>
+            <span class="tag">Customer Segmentation</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Simon Venture Fund -->
+      <div class="timeline-item">
+        <div class="timeline-logo">
+          <span class="logo-placeholder">SVF</span>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-meta">
+            <span class="timeline-date">2023</span>
+            <span class="timeline-dot"></span>
+            <span class="timeline-company">Simon School Venture Fund</span>
+          </div>
+          <h2 class="timeline-role">Technology Validation — OneHealth Group</h2>
+          <ul class="timeline-bullets">
+            <li>Interviewed OHG management and investors to assess product, technology, and business model viability.</li>
+            <li>Quantified product impact with visual representations to support the investment decision.</li>
+          </ul>
+          <div class="timeline-tags">
+            <span class="tag">Venture Analysis</span>
+            <span class="tag">Due Diligence</span>
+            <span class="tag">Stakeholder Interviews</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bank Loan Model -->
+      <div class="timeline-item">
+        <div class="timeline-logo">
+          <span class="logo-placeholder">ML</span>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-meta">
+            <span class="timeline-date">2023</span>
+          </div>
+          <h2 class="timeline-role">Bank Loan Approval Prediction Model</h2>
+          <ul class="timeline-bullets">
+            <li>Analyzed 73K customer records; applied Random Forest and Decision Tree to achieve 98% model accuracy.</li>
+            <li>Segmented customers into 3 groups and identified key variables to improve approval rates.</li>
+          </ul>
+          <div class="timeline-tags">
+            <span class="tag highlight">R</span>
+            <span class="tag">Random Forest</span>
+            <span class="tag">Decision Tree</span>
+            <span class="tag">Customer Segmentation</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ANU / CSIRO -->
+      <div class="timeline-item">
+        <div class="timeline-logo">
+          <span class="logo-placeholder">ANU</span>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-meta">
+            <span class="timeline-date">2022</span>
+            <span class="timeline-dot"></span>
+            <span class="timeline-company">ANU · CSIRO</span>
+          </div>
+          <h2 class="timeline-role">Digitalized Asset Strategy — Colon Cancer Research</h2>
+          <ul class="timeline-bullets">
+            <li>Interviewed 7 CSIRO professionals and 100+ target audience members to identify commercialization opportunities.</li>
+            <li>Proposed 4 omnichannel marketing approaches; projected NPV of $5.43M and 4.05% improvement in domestic survival rates.</li>
+          </ul>
+          <div class="timeline-tags">
+            <span class="tag">Business Model Design</span>
+            <span class="tag">Market Sizing</span>
+            <span class="tag">NPV Analysis</span>
+            <span class="tag">Omnichannel</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Walmart China -->
+      <div class="timeline-item">
+        <div class="timeline-logo">
+          <span class="logo-placeholder">WM</span>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-meta">
+            <span class="timeline-date">2021</span>
+            <span class="timeline-dot"></span>
+            <span class="timeline-company">Walmart China · 'Future of Retail' Case Competition</span>
+          </div>
+          <h2 class="timeline-role">E-Commerce Strategy Proposal</h2>
+          <ul class="timeline-bullets">
+            <li>Designed a retail business plan for an app combining menu planning and online grocery, targeting improved user engagement and sales.</li>
+            <li>Conducted market and customer analysis to ensure competitiveness, compliance, and profitability.</li>
+          </ul>
+          <div class="timeline-tags">
+            <span class="tag">E-Commerce Strategy</span>
+            <span class="tag">Product Design</span>
+            <span class="tag">Market Analysis</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>© 2025 Wenxin Zeng &nbsp;·&nbsp; Built with GitHub Pages</footer>
 
   <script>
-    function switchTab(tab) {
+    function switchTab(tab, btn) {
       document.querySelectorAll('.timeline-section').forEach(s => s.classList.remove('active'));
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       document.getElementById(tab).classList.add('active');
-      event.target.classList.add('active');
-      observeItems();
+      btn.classList.add('active');
+      setTimeout(observeItems, 50);
     }
 
-    // Scroll-triggered fade-in
     function observeItems() {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((e, i) => {
           if (e.isIntersecting) {
-            setTimeout(() => e.target.classList.add('visible'), i * 100);
+            setTimeout(() => e.target.classList.add('visible'), i * 80);
             observer.unobserve(e.target);
           }
         });
-      }, { threshold: 0.15 });
+      }, { threshold: 0.1 });
 
       document.querySelectorAll('.timeline-section.active .timeline-item').forEach(el => {
         el.classList.remove('visible');
