@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Name — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ivory:      #FDFAF4;
+      --ivory-mid:  #F0EBE0;
+      --tan:        #C9B99A;
+      --forest:     #1C3A2B;
+      --sage:       #4A7C59;
+      --sage-light: #6A9E78;
+      --text:       #2A2A2A;
+      --text-muted: #6B6B6B;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--ivory);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 3rem;
+      background: rgba(253,250,244,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--tan);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; font-weight: 600;
+      color: var(--forest); letter-spacing: 0.04em;
+    }
+    .nav-links { display: flex; gap: 2.4rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none; font-size: 0.78rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--text-muted);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--sage); }
+    .nav-leaf {
+      width: 18px; opacity: 0.35;
+      fill: var(--sage);
+    }
+
+    /* ── HERO / CARD ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 7rem 2rem 4rem;
+    }
+    .card {
+      background: var(--forest);
+      color: var(--ivory);
+      border-radius: 4px;
+      padding: 4rem 4.5rem;
+      max-width: 780px; width: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+    /* botanical corner accent */
+    .card::before {
+      content: '';
+      position: absolute; top: -40px; right: -40px;
+      width: 180px; height: 180px;
+      background: radial-gradient(circle at center, rgba(74,124,89,0.35) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .card::after {
+      content: '';
+      position: absolute; bottom: -50px; left: -30px;
+      width: 150px; height: 150px;
+      background: radial-gradient(circle at center, rgba(201,185,154,0.15) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .card-eyebrow {
+      font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--tan); margin-bottom: 1.2rem;
+    }
+    .card-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.8rem, 6vw, 4.2rem);
+      font-weight: 300; line-height: 1.05;
+      color: var(--ivory); margin-bottom: 0.5rem;
+    }
+    .card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem; font-weight: 300; font-style: italic;
+      color: var(--tan); margin-bottom: 2.4rem;
+    }
+
+    .divider {
+      width: 48px; height: 1px;
+      background: var(--sage-light); margin-bottom: 2rem;
+    }
+
+    .card-status {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(74,124,89,0.25);
+      border: 1px solid rgba(106,158,120,0.4);
+      border-radius: 2px;
+      padding: 0.35rem 0.9rem;
+      font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--sage-light); margin-bottom: 2.5rem;
+    }
+    .status-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--sage-light);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .card-bio {
+      font-size: 0.95rem; line-height: 1.8;
+      color: rgba(253,250,244,0.75);
+      max-width: 520px; margin-bottom: 3rem;
+    }
+
+    /* Skills */
+    .skills-label {
+      font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--tan); margin-bottom: 1rem;
+    }
+    .skills-grid {
+      display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 3rem;
+    }
+    .skill-tag {
+      border: 1px solid rgba(201,185,154,0.4);
+      border-radius: 2px;
+      padding: 0.3rem 0.75rem;
+      font-size: 0.72rem; letter-spacing: 0.08em;
+      color: rgba(253,250,244,0.8);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .skill-tag:hover {
+      border-color: var(--sage-light);
+      background: rgba(74,124,89,0.2);
+    }
+
+    /* Contact row */
+    .card-contact {
+      display: flex; flex-wrap: wrap; gap: 1.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(201,185,154,0.25);
+    }
+    .contact-item {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.78rem; color: rgba(253,250,244,0.6);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .contact-item:hover { color: var(--tan); }
+    .contact-item svg { width: 14px; height: 14px; fill: currentColor; opacity: 0.7; }
+
+    /* ── QUICK NAV BELOW CARD ── */
+    .page-links {
+      display: flex; justify-content: center; gap: 2rem;
+      padding: 3rem 2rem;
+    }
+    .page-link {
+      display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
+      text-decoration: none;
+      color: var(--forest);
+      transition: transform 0.2s;
+    }
+    .page-link:hover { transform: translateY(-3px); }
+    .page-link-icon {
+      width: 54px; height: 54px; border-radius: 50%;
+      border: 1.5px solid var(--tan);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      background: var(--ivory-mid);
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .page-link:hover .page-link-icon {
+      background: var(--forest);
+      border-color: var(--forest);
+      color: var(--ivory);
+    }
+    .page-link span {
+      font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.7rem; letter-spacing: 0.1em;
+      color: var(--tan);
+      border-top: 1px solid var(--ivory-mid);
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 1rem 1.5rem; }
+      .card { padding: 2.5rem 2rem; }
+      .page-links { gap: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-logo">YN</span>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="experience.html">Experience</a></li>
+      <li><a href="hobbies.html">Hobbies</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="card">
+
+        <p class="card-eyebrow">Personal Portfolio</p>
+
+        <h1 class="card-name">Your Full<br>Name</h1>
+        <p class="card-title">Your Job Title / Profession</p>
+
+        <div class="divider"></div>
+
+        <div class="card-status">
+          <span class="status-dot"></span>
+          Open to new opportunities <!-- or: Currently at Company X -->
+        </div>
+
+        <p class="card-bio">
+          A short paragraph about yourself — who you are, what you do, and what drives you.
+          Keep it to 2–3 sentences. Make it personal and genuine.
+        </p>
+
+        <p class="skills-label">Core Strengths</p>
+        <div class="skills-grid">
+          <!-- ✏️ Replace with your own skills -->
+          <span class="skill-tag">Skill One</span>
+          <span class="skill-tag">Skill Two</span>
+          <span class="skill-tag">Skill Three</span>
+          <span class="skill-tag">Skill Four</span>
+          <span class="skill-tag">Skill Five</span>
+          <span class="skill-tag">Skill Six</span>
+        </div>
+
+        <div class="card-contact">
+          <a class="contact-item" href="mailto:your@email.com">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            your@email.com
+          </a>
+          <a class="contact-item" href="https://linkedin.com/in/yourprofile" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57A1.46 1.46 0 0 1 14.38 12.11A1.46 1.46 0 0 1 15.84 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z"/></svg>
+            LinkedIn
+          </a>
+          <a class="contact-item" href="https://github.com/yourusername" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+            GitHub
+          </a>
+          <span class="contact-item">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            City, Country
+          </span>
+        </div>
+
+      </div>
+    </section>
+
+    <div class="page-links">
+      <a class="page-link" href="experience.html">
+        <div class="page-link-icon">🗂</div>
+        <span>Experience</span>
+      </a>
+      <a class="page-link" href="hobbies.html">
+        <div class="page-link-icon">🌿</div>
+        <span>Hobbies</span>
+      </a>
+    </div>
+  </main>
+
+  <footer>© 2025 Your Name &nbsp;·&nbsp; Built with GitHub Pages</footer>
+
+</body>
+</html>

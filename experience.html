@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Experience — Your Name</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ivory:      #FDFAF4;
+      --ivory-mid:  #F0EBE0;
+      --tan:        #C9B99A;
+      --forest:     #1C3A2B;
+      --sage:       #4A7C59;
+      --sage-light: #6A9E78;
+      --text:       #2A2A2A;
+      --text-muted: #6B6B6B;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--ivory);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 3rem;
+      background: rgba(253,250,244,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--tan);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; font-weight: 600;
+      color: var(--forest); letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.4rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none; font-size: 0.78rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--text-muted);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--sage); }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      padding: 10rem 3rem 3rem;
+      max-width: 860px; margin: 0 auto;
+    }
+    .page-header-eyebrow {
+      font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--sage); margin-bottom: 0.8rem;
+    }
+    .page-header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 5vw, 3.6rem); font-weight: 300;
+      color: var(--forest); line-height: 1.1;
+    }
+
+    /* ── SECTION TABS ── */
+    .tabs {
+      display: flex; gap: 0.5rem;
+      max-width: 860px; margin: 0 auto;
+      padding: 0 3rem 2.5rem;
+    }
+    .tab-btn {
+      background: none; border: 1px solid var(--tan);
+      border-radius: 2px;
+      padding: 0.4rem 1.1rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-muted); cursor: pointer;
+      transition: all 0.2s;
+    }
+    .tab-btn:hover { border-color: var(--sage); color: var(--sage); }
+    .tab-btn.active { background: var(--forest); border-color: var(--forest); color: var(--ivory); }
+
+    /* ── TIMELINE ── */
+    .timeline-section { display: none; }
+    .timeline-section.active { display: block; }
+
+    .timeline {
+      max-width: 860px; margin: 0 auto;
+      padding: 0 3rem 6rem;
+      position: relative;
+    }
+    /* vertical line */
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: calc(3rem + 28px);
+      top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--tan), transparent);
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 0 2rem;
+      margin-bottom: 3.5rem;
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .timeline-item.visible { opacity: 1; transform: translateY(0); }
+
+    /* logo column */
+    .timeline-logo {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      border: 1.5px solid var(--tan);
+      background: var(--ivory-mid);
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+      position: relative; z-index: 1;
+    }
+    .timeline-logo img {
+      width: 36px; height: 36px; object-fit: contain;
+    }
+    .timeline-logo .logo-placeholder {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; font-weight: 600;
+      color: var(--forest);
+    }
+
+    /* content column */
+    .timeline-content {
+      padding-top: 0.3rem;
+    }
+    .timeline-meta {
+      display: flex; align-items: center; gap: 0.8rem;
+      margin-bottom: 0.4rem; flex-wrap: wrap;
+    }
+    .timeline-date {
+      font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--sage); white-space: nowrap;
+    }
+    .timeline-dot {
+      width: 3px; height: 3px; border-radius: 50%;
+      background: var(--tan); flex-shrink: 0;
+    }
+    .timeline-company {
+      font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .timeline-role {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem; font-weight: 400;
+      color: var(--forest); margin-bottom: 0.7rem; line-height: 1.2;
+    }
+    .timeline-desc {
+      font-size: 0.88rem; line-height: 1.75;
+      color: var(--text-muted); margin-bottom: 1rem;
+      max-width: 560px;
+    }
+    .timeline-tags {
+      display: flex; flex-wrap: wrap; gap: 0.45rem;
+    }
+    .tag {
+      background: var(--ivory-mid);
+      border: 1px solid var(--tan);
+      border-radius: 2px;
+      padding: 0.2rem 0.65rem;
+      font-size: 0.67rem; letter-spacing: 0.06em;
+      color: var(--text-muted);
+    }
+
+    /* education uses same cards but slightly different accent */
+    .edu .timeline-date { color: var(--tan); }
+    .edu .timeline-role { color: var(--forest); }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.7rem; letter-spacing: 0.1em;
+      color: var(--tan);
+      border-top: 1px solid var(--ivory-mid);
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 1rem 1.5rem; }
+      .page-header, .tabs, .timeline { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .timeline::before { left: calc(1.5rem + 28px); }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="index.html">YN</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="experience.html" class="active">Experience</a></li>
+      <li><a href="hobbies.html">Hobbies</a></li>
+    </ul>
+  </nav>
+
+  <header class="page-header">
+    <p class="page-header-eyebrow">My Journey</p>
+    <h1>Education &<br>Work Experience</h1>
+  </header>
+
+  <!-- Tab switcher -->
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('work')">Work</button>
+    <button class="tab-btn" onclick="switchTab('education')">Education</button>
+  </div>
+
+  <!-- ── WORK TIMELINE ── -->
+  <section class="timeline-section active" id="work">
+    <div class="timeline">
+
+      <!-- ✏️ ENTRY 1 — Most recent first -->
+      <div class="timeline-item">
+        <div class="timeline-logo">
+          <!-- Option A: use your own image -->
+          <!-- <img src="logos/company1.png" alt="Company 1"> -->
+          <!-- Option B: placeholder initials -->
+          <span class="logo-placeholder">C1</span>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-meta">
+            <span class="timeline-date">Jan 2023 — Present</span>
+            <span class="timeline-dot"></span>
+            <span class="timeline-company">Company Name</span>
+          </div>
+          <h2 class="timeline-role">Your Job Title</h2>
+          <p class="timeline-desc">
+            Describe what you did in this role. Focus on impact and outcomes rather than duties.
+            What did you build, improve, or lead? 2–3 sentences works well here.
+          </p>
+          <div class="timeline-tags">
+            <span class="tag">Keyword 1</span>
+            <span class="tag">Keyword 2</span>
+            <span class="tag">Keyword 3</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ✏️ ENTRY 2 -->
+      <div class="timeline-item">
+        <div class="timeline-logo">
+          <span class="logo-placeholder">C2</span>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-meta">
+            <span class="timeline-date">Jun 2020 — Dec 2022</span>
+            <span class="timeline-dot"></span>
+            <span class="timeline-company">Previous Company</span>
+          </div>
+          <h2 class="timeline-role">Previous Role</h2>
+          <p class="timeline-desc">
+            What you accomplished here. Keep it concise and achievement-oriented.
+          </p>
+          <div class="timeline-tags">
+            <span class="tag">Keyword A</span>
+            <span class="tag">Keyword B</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ✏️ ENTRY 3 — duplicate block as needed -->
+      <div class="timeline-item">
+        <div class="timeline-logo">
+          <span class="logo-placeholder">C3</span>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-meta">
+            <span class="timeline-date">2018 — 2020</span>
+            <span class="timeline-dot"></span>
+            <span class="timeline-company">Earlier Company</span>
+          </div>
+          <h2 class="timeline-role">Earlier Role</h2>
+          <p class="timeline-desc">
+            Brief description of your responsibilities and achievements.
+          </p>
+          <div class="timeline-tags">
+            <span class="tag">Tag 1</span>
+            <span class="tag">Tag 2</span>
+            <span class="tag">Tag 3</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── EDUCATION TIMELINE ── -->
+  <section class="timeline-section edu" id="education">
+    <div class="timeline">
+
+      <!-- ✏️ EDUCATION ENTRY 1 -->
+      <div class="timeline-item">
+        <div class="timeline-logo">
+          <!-- <img src="logos/university1.png" alt="University"> -->
+          <span class="logo-placeholder">U1</span>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-meta">
+            <span class="timeline-date">2016 — 2020</span>
+            <span class="timeline-dot"></span>
+            <span class="timeline-company">University Name</span>
+          </div>
+          <h2 class="timeline-role">Bachelor of ___</h2>
+          <p class="timeline-desc">
+            Major / specialization. Any honors, thesis topic, or relevant activities worth mentioning.
+          </p>
+          <div class="timeline-tags">
+            <span class="tag">Major Topic</span>
+            <span class="tag">Dean's List</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ✏️ EDUCATION ENTRY 2 -->
+      <div class="timeline-item">
+        <div class="timeline-logo">
+          <span class="logo-placeholder">U2</span>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-meta">
+            <span class="timeline-date">2020 — 2022</span>
+            <span class="timeline-dot"></span>
+            <span class="timeline-company">Another Institution</span>
+          </div>
+          <h2 class="timeline-role">Master of ___</h2>
+          <p class="timeline-desc">
+            Description of program and key learnings or projects.
+          </p>
+          <div class="timeline-tags">
+            <span class="tag">Specialization</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>© 2025 Your Name &nbsp;·&nbsp; Built with GitHub Pages</footer>
+
+  <script>
+    function switchTab(tab) {
+      document.querySelectorAll('.timeline-section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(tab).classList.add('active');
+      event.target.classList.add('active');
+      observeItems();
+    }
+
+    // Scroll-triggered fade-in
+    function observeItems() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((e, i) => {
+          if (e.isIntersecting) {
+            setTimeout(() => e.target.classList.add('visible'), i * 100);
+            observer.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.15 });
+
+      document.querySelectorAll('.timeline-section.active .timeline-item').forEach(el => {
+        el.classList.remove('visible');
+        observer.observe(el);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', observeItems);
+  </script>
+</body>
+</html>
