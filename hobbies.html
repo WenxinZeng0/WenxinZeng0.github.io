@@ -3,223 +3,163 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hobbies — Your Name</title>
+  <title>Hobbies — Wenxin Zeng</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --ivory:      #FDFAF4;
-      --ivory-mid:  #F0EBE0;
-      --tan:        #C9B99A;
-      --forest:     #1C3A2B;
-      --sage:       #4A7C59;
-      --sage-light: #6A9E78;
-      --text:       #2A2A2A;
-      --text-muted: #6B6B6B;
+      --ivory: #FDFAF4; --ivory-mid: #F0EBE0; --tan: #C9B99A;
+      --forest: #1C3A2B; --sage: #4A7C59; --sage-light: #6A9E78;
+      --text: #2A2A2A; --text-muted: #6B6B6B;
     }
+    body { background: var(--ivory); color: var(--text); font-family: 'Inter', sans-serif; font-weight: 300; min-height: 100vh; }
 
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--ivory);
-      color: var(--text);
-      font-family: 'Inter', sans-serif;
-      font-weight: 300;
-      min-height: 100vh;
-    }
-
-    /* ── NAV ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
       padding: 1.2rem 3rem;
-      background: rgba(253,250,244,0.92);
-      backdrop-filter: blur(8px);
+      background: rgba(253,250,244,0.92); backdrop-filter: blur(8px);
       border-bottom: 1px solid var(--tan);
     }
-    .nav-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.3rem; font-weight: 600;
-      color: var(--forest); letter-spacing: 0.04em;
-      text-decoration: none;
-    }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; color: var(--forest); text-decoration: none; }
     .nav-links { display: flex; gap: 2.4rem; list-style: none; }
-    .nav-links a {
-      text-decoration: none; font-size: 0.78rem; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--text-muted);
-      transition: color 0.2s;
-    }
+    .nav-links a { text-decoration: none; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); transition: color 0.2s; }
     .nav-links a:hover, .nav-links a.active { color: var(--sage); }
 
-    /* ── PAGE HEADER ── */
-    .page-header {
-      padding: 10rem 3rem 1rem;
-      max-width: 900px; margin: 0 auto; text-align: center;
+    .page-header { padding: 9rem 3rem 3rem; text-align: center; }
+    .page-header-eyebrow { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sage); margin-bottom: 0.8rem; }
+    .page-header h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 5vw, 3.2rem); font-weight: 300; color: var(--forest); margin-bottom: 0.6rem; }
+    .page-header p { font-size: 0.88rem; color: var(--text-muted); max-width: 360px; margin: 0 auto; line-height: 1.7; }
+
+    /* ── ORBS GRID ── */
+    .orbs-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 3rem;
+      padding: 3rem 3rem 6rem;
+      max-width: 1000px;
+      margin: 0 auto;
     }
-    .page-header-eyebrow {
-      font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--sage); margin-bottom: 0.8rem;
+
+    /* each orb wrapper — holds both the circle and the expanded card */
+    .orb-wrap {
+      position: relative;
+      width: 160px;
+      height: 160px;
+      flex-shrink: 0;
     }
-    .page-header h1 {
+
+    /* the circle itself */
+    .orb {
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      cursor: pointer;
+      position: absolute; top: 0; left: 0;
+      z-index: 2;
+      transition: opacity 0.3s ease;
+    }
+    .orb-emoji { font-size: 2.2rem; margin-bottom: 0.4rem; line-height: 1; }
+    .orb-label {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.4rem, 5vw, 3.6rem); font-weight: 300;
-      color: var(--forest); line-height: 1.1; margin-bottom: 0.8rem;
-    }
-    .page-header p {
-      font-size: 0.9rem; color: var(--text-muted); max-width: 480px; margin: 0 auto;
-      line-height: 1.7;
+      font-size: 1rem; font-weight: 400;
+      letter-spacing: 0.02em;
     }
 
-    /* ── TREE CANVAS ── */
-    .tree-wrapper {
-      width: 100%; max-width: 900px; margin: 3rem auto 0;
-      padding: 0 1.5rem;
-      display: flex; justify-content: center;
-    }
+    /* orb colors */
+    .orb-climbing  { background: #2D5E3E; }
+    .orb-climbing .orb-label { color: #FDFAF4; }
+    .orb-drawing   { background: #7A5C1E; }
+    .orb-drawing .orb-label  { color: #FDF4DC; }
+    .orb-fashion   { background: #6B2A50; }
+    .orb-fashion .orb-label  { color: #FDF0F6; }
+    .orb-3dprint   { background: #1E3A6A; }
+    .orb-3dprint .orb-label  { color: #EEF2FD; }
 
-    .tree-svg {
-      width: 100%; max-width: 860px;
-      height: auto;
-      overflow: visible;
-    }
+    /* expanded card — grows from center of orb */
+    .orb-card {
+      position: absolute;
+      /* centered on orb */
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%) scale(0.3);
+      transform-origin: center center;
 
-    /* Trunk & branch lines */
-    .branch {
-      stroke: var(--forest);
-      stroke-linecap: round;
-      fill: none;
-      stroke-dasharray: 1000;
-      stroke-dashoffset: 1000;
-      animation: drawLine 1.2s ease forwards;
-    }
-    @keyframes drawLine {
-      to { stroke-dashoffset: 0; }
-    }
-
-    /* Leaf nodes */
-    .leaf-group { cursor: pointer; }
-    .leaf-circle {
-      fill: var(--ivory-mid);
-      stroke: var(--sage);
-      stroke-width: 1.5;
-      transform-origin: center;
-      transform: scale(0);
-      animation: popIn 0.4s ease forwards;
-    }
-    @keyframes popIn {
-      to { transform: scale(1); }
-    }
-    .leaf-circle.root {
-      fill: var(--forest);
-      stroke: var(--forest);
-    }
-    .leaf-circle.branch-node {
-      fill: var(--sage);
-      stroke: var(--sage);
-    }
-    .leaf-circle:hover {
-      fill: var(--forest);
-    }
-
-    .leaf-icon {
-      font-size: 1.3rem;
-      dominant-baseline: central;
-      text-anchor: middle;
-      opacity: 0;
-      animation: fadeIn 0.3s ease forwards;
-    }
-    @keyframes fadeIn { to { opacity: 1; } }
-
-    .leaf-label {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 15px;
-      fill: var(--forest);
-      text-anchor: middle;
-      dominant-baseline: central;
-      opacity: 0;
-      animation: fadeIn 0.3s ease forwards;
-    }
-    .leaf-label.on-dark {
-      fill: var(--ivory);
-    }
-    .leaf-sublabel {
-      font-family: 'Inter', sans-serif;
-      font-size: 9.5px;
-      fill: var(--text-muted);
-      text-anchor: middle;
-      opacity: 0;
-      animation: fadeIn 0.3s ease forwards;
-      letter-spacing: 0.04em;
-    }
-
-    /* Tooltip */
-    .tooltip {
-      position: fixed;
-      background: var(--forest);
-      color: var(--ivory);
-      padding: 0.6rem 1rem;
-      border-radius: 3px;
-      font-size: 0.78rem;
-      line-height: 1.5;
-      max-width: 220px;
+      width: 320px;
+      border-radius: 16px;
+      padding: 2rem;
+      z-index: 10;
       pointer-events: none;
       opacity: 0;
-      transition: opacity 0.2s;
-      z-index: 200;
-    }
-    .tooltip.show { opacity: 1; }
-    .tooltip strong {
-      display: block; font-weight: 500;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1rem;
+      transition: transform 0.4s cubic-bezier(0.34, 1.3, 0.64, 1),
+                  opacity 0.3s ease;
     }
 
-    /* ── DETAIL CARDS below tree ── */
-    .detail-cards {
-      max-width: 900px; margin: 4rem auto 5rem;
-      padding: 0 3rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.5rem;
-    }
-    .detail-card {
-      border: 1px solid var(--tan);
-      border-radius: 3px;
-      padding: 1.8rem;
-      background: var(--ivory);
-      transition: border-color 0.2s, transform 0.2s;
-    }
-    .detail-card:hover { border-color: var(--sage); transform: translateY(-2px); }
-    .detail-card-icon { font-size: 1.6rem; margin-bottom: 0.8rem; }
-    .detail-card h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.2rem; font-weight: 400;
-      color: var(--forest); margin-bottom: 0.5rem;
-    }
-    .detail-card p {
-      font-size: 0.82rem; line-height: 1.7;
-      color: var(--text-muted);
+    /* card colors mirror orb */
+    .orb-climbing  .orb-card { background: #2D5E3E; color: #FDFAF4; }
+    .orb-drawing   .orb-card { background: #7A5C1E; color: #FDF4DC; }
+    .orb-fashion   .orb-card { background: #6B2A50; color: #FDF0F6; }
+    .orb-3dprint   .orb-card { background: #1E3A6A; color: #EEF2FD; }
+
+    /* hover state */
+    .orb-wrap:hover .orb { opacity: 0; pointer-events: none; }
+    .orb-wrap:hover .orb-card {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translate(-50%, -50%) scale(1);
     }
 
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.7rem; letter-spacing: 0.1em;
-      color: var(--tan);
-      border-top: 1px solid var(--ivory-mid);
+    .orb-card-emoji { font-size: 1.8rem; margin-bottom: 0.6rem; display: block; }
+    .orb-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; font-weight: 400;
+      margin-bottom: 0.3rem; line-height: 1.1;
     }
+    .orb-card-sub {
+      font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
+      opacity: 0.6; margin-bottom: 1rem;
+    }
+    .orb-card-divider {
+      width: 32px; height: 1px;
+      background: currentColor; opacity: 0.3;
+      margin-bottom: 1rem;
+    }
+    .orb-card p {
+      font-size: 0.82rem; line-height: 1.75;
+      opacity: 0.85;
+    }
+
+    /* photo inside card */
+    .orb-card-photo {
+      width: 100%; height: 120px;
+      border-radius: 8px; overflow: hidden;
+      margin-bottom: 1rem;
+    }
+    .orb-card-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .orb-card-photo-placeholder {
+      width: 100%; height: 100%;
+      background: rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+    }
+
+    footer { text-align: center; padding: 2rem; font-size: 0.7rem; letter-spacing: 0.1em; color: var(--tan); border-top: 1px solid var(--ivory-mid); }
 
     @media (max-width: 600px) {
       nav { padding: 1rem 1.5rem; }
       .page-header { padding-left: 1.5rem; padding-right: 1.5rem; }
-      .detail-cards { padding: 0 1.5rem; }
+      .orbs-grid { gap: 2rem; padding: 2rem 1.5rem 4rem; }
+      .orb-wrap { width: 130px; height: 130px; }
+      .orb { width: 130px; height: 130px; }
+      .orb-card { width: 260px; }
     }
   </style>
 </head>
 <body>
 
   <nav>
-    <a class="nav-logo" href="index.html">YN</a>
+    <a class="nav-logo" href="index.html">WZ</a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="experience.html">Experience</a></li>
@@ -230,159 +170,90 @@
   <header class="page-header">
     <p class="page-header-eyebrow">Beyond Work</p>
     <h1>What Makes Me, Me</h1>
-    <p>The things I chase when the laptop closes — curiosity, movement, and making.</p>
+    <p>Hover over each to explore what I love doing when the laptop closes.</p>
   </header>
 
-  <div class="tree-wrapper">
-    <!--
-      TREE STRUCTURE (top-down):
+  <div class="orbs-grid">
 
-                        [ME]  ← root, center top
-                       /    \
-             [Climbing]    [Arts & Creativity]
-               /               /         \
-        [Bouldering]     [Drawing]   [Fashion Design]
-        [Lead Climb]
+    <!-- 🧗 Climbing -->
+    <div class="orb-wrap">
+      <div class="orb orb-climbing">
+        <span class="orb-emoji">🧗</span>
+        <span class="orb-label">Climbing</span>
+      </div>
+      <div class="orb-card">
+        <span class="orb-card-emoji">🧗</span>
+        <h3>Rock Climbing</h3>
+        <p class="orb-card-sub">Bouldering · Lead</p>
+        <div class="orb-card-photo">
+          <!-- ✏️ <img src="images/climbing.jpg" alt="Climbing"> -->
+          <div class="orb-card-photo-placeholder">🪨</div>
+        </div>
+        <div class="orb-card-divider"></div>
+        <p>Every route is a puzzle your brain and body have to solve at the same moment. I boulder and lead climb — it keeps me strong, present, and never bored.</p>
+      </div>
+    </div>
 
-      SVG coordinate system: viewBox "0 0 860 500"
-      Center X = 430
-    -->
-    <svg class="tree-svg" viewBox="0 0 860 520" xmlns="http://www.w3.org/2000/svg">
+    <!-- 🎨 Drawing -->
+    <div class="orb-wrap">
+      <div class="orb orb-drawing">
+        <span class="orb-emoji">🎨</span>
+        <span class="orb-label">Drawing</span>
+      </div>
+      <div class="orb-card">
+        <span class="orb-card-emoji">🎨</span>
+        <h3>Drawing & Illustration</h3>
+        <p class="orb-card-sub">Pencil · Ink · Watercolour</p>
+        <div class="orb-card-photo">
+          <!-- ✏️ <img src="images/drawing.jpg" alt="Drawing"> -->
+          <div class="orb-card-photo-placeholder">✏️</div>
+        </div>
+        <div class="orb-card-divider"></div>
+        <p>Drawing is how I slow down and really look. Portraits and figures are my comfort zone — lately I've been exploring interiors and spaces that tell a story without a person in them.</p>
+      </div>
+    </div>
 
-      <!-- ── TRUNK: Root → branches ── -->
-      <!-- Root down to Climbing fork -->
-      <line class="branch" x1="430" y1="90" x2="240" y2="230" stroke-width="3" style="animation-delay:0.1s"/>
-      <!-- Root down to Arts fork -->
-      <line class="branch" x1="430" y1="90" x2="620" y2="230" stroke-width="3" style="animation-delay:0.1s"/>
+    <!-- 🧵 Fashion -->
+    <div class="orb-wrap">
+      <div class="orb orb-fashion">
+        <span class="orb-emoji">🧵</span>
+        <span class="orb-label">Fashion</span>
+      </div>
+      <div class="orb-card">
+        <span class="orb-card-emoji">🧵</span>
+        <h3>Fashion Design</h3>
+        <p class="orb-card-sub">Costume Making · 210K views</p>
+        <div class="orb-card-photo">
+          <!-- ✏️ <img src="images/fashion.jpg" alt="Fashion"> -->
+          <div class="orb-card-photo-placeholder">👗</div>
+        </div>
+        <div class="orb-card-divider"></div>
+        <p>I design and make clothes — costumes built for a character or a moment. My process channel has grown to 210K views, which still surprises me every time I think about it.</p>
+      </div>
+    </div>
 
-      <!-- Climbing → Bouldering -->
-      <line class="branch" x1="240" y1="270" x2="140" y2="390" stroke-width="2" style="animation-delay:0.8s"/>
-      <!-- Climbing → Lead Climbing -->
-      <line class="branch" x1="240" y1="270" x2="310" y2="390" stroke-width="2" style="animation-delay:0.9s"/>
+    <!-- 🖨 3D Printing -->
+    <div class="orb-wrap">
+      <div class="orb orb-3dprint">
+        <span class="orb-emoji">🖨</span>
+        <span class="orb-label">3D Printing</span>
+      </div>
+      <div class="orb-card">
+        <span class="orb-card-emoji">🖨</span>
+        <h3>3D Printing</h3>
+        <p class="orb-card-sub">FDM · Functional & Decorative</p>
+        <div class="orb-card-photo">
+          <!-- ✏️ <img src="images/3dprint.jpg" alt="3D Printing"> -->
+          <div class="orb-card-photo-placeholder">🔧</div>
+        </div>
+        <div class="orb-card-divider"></div>
+        <p>If you can model it, you can make it. I got hooked making a custom gear organizer and never stopped — from prototypes to replacement parts for things that no longer exist in stores.</p>
+      </div>
+    </div>
 
-      <!-- Arts → Drawing -->
-      <line class="branch" x1="620" y1="270" x2="520" y2="390" stroke-width="2" style="animation-delay:0.8s"/>
-      <!-- Arts → Fashion Design -->
-      <line class="branch" x1="620" y1="270" x2="720" y2="390" stroke-width="2" style="animation-delay:0.9s"/>
-
-      <!-- ── ROOT NODE ── -->
-      <g class="leaf-group"
-         data-title="That's Me"
-         data-desc="A curious person who finds meaning in both physical challenge and creative expression.">
-        <circle class="leaf-circle root" cx="430" cy="68" r="44" style="animation-delay:0s"/>
-        <text class="leaf-label on-dark" x="430" y="62" style="animation-delay:0.2s; font-size:13px;">Your</text>
-        <text class="leaf-label on-dark" x="430" y="78" style="animation-delay:0.2s; font-size:13px;">Name</text>
-      </g>
-
-      <!-- ── BRANCH: CLIMBING ── -->
-      <g class="leaf-group"
-         data-title="Rock Climbing"
-         data-desc="One of my greatest passions — being on the wall clears my mind and challenges me physically and mentally.">
-        <circle class="leaf-circle branch-node" cx="240" cy="250" r="38" style="animation-delay:0.5s"/>
-        <text class="leaf-icon" x="240" y="247" style="animation-delay:0.7s">🧗</text>
-        <text class="leaf-label on-dark" x="240" y="264" style="animation-delay:0.7s; font-size:12px;">Climbing</text>
-      </g>
-
-      <!-- ── BRANCH: ARTS ── -->
-      <g class="leaf-group"
-         data-title="Arts & Creativity"
-         data-desc="Making things with my hands — whether on paper or fabric — keeps me grounded.">
-        <circle class="leaf-circle branch-node" cx="620" cy="250" r="38" style="animation-delay:0.5s"/>
-        <text class="leaf-icon" x="620" y="247" style="animation-delay:0.7s">🎨</text>
-        <text class="leaf-label on-dark" x="620" y="264" style="animation-delay:0.7s; font-size:12px;">Arts</text>
-      </g>
-
-      <!-- ── LEAF: Bouldering ── -->
-      <g class="leaf-group"
-         data-title="Bouldering"
-         data-desc="Short, powerful problems on the wall — pure problem-solving with your body. No ropes, just movement.">
-        <circle class="leaf-circle" cx="140" cy="415" r="34" style="animation-delay:1.1s"/>
-        <text class="leaf-icon" x="140" y="410" style="animation-delay:1.3s; font-size:1.1rem">🪨</text>
-        <text class="leaf-label" x="140" y="428" style="animation-delay:1.3s; font-size:11.5px; fill:#1C3A2B">Bouldering</text>
-      </g>
-
-      <!-- ── LEAF: Lead Climbing ── -->
-      <g class="leaf-group"
-         data-title="Lead Climbing"
-         data-desc="Rope climbing for height and endurance. I love the focus required on longer routes.">
-        <circle class="leaf-circle" cx="318" cy="415" r="34" style="animation-delay:1.2s"/>
-        <text class="leaf-icon" x="318" y="410" style="animation-delay:1.4s; font-size:1.1rem">🔗</text>
-        <text class="leaf-label" x="318" y="427" style="animation-delay:1.4s; font-size:10.5px; fill:#1C3A2B">Lead Climb</text>
-      </g>
-
-      <!-- ── LEAF: Drawing ── -->
-      <g class="leaf-group"
-         data-title="Drawing & Illustration"
-         data-desc="I sketch as a way to observe the world more carefully — portraits, figures, and everyday scenes.">
-        <circle class="leaf-circle" cx="520" cy="415" r="34" style="animation-delay:1.1s"/>
-        <text class="leaf-icon" x="520" y="410" style="animation-delay:1.3s; font-size:1.1rem">✏️</text>
-        <text class="leaf-label" x="520" y="428" style="animation-delay:1.3s; font-size:11.5px; fill:#1C3A2B">Drawing</text>
-      </g>
-
-      <!-- ── LEAF: Fashion Design ── -->
-      <g class="leaf-group"
-         data-title="Fashion Design"
-         data-desc="Designing clothes is where my visual thinking becomes wearable — I love the intersection of body, fabric, and identity.">
-        <circle class="leaf-circle" cx="720" cy="415" r="34" style="animation-delay:1.2s"/>
-        <text class="leaf-icon" x="720" y="410" style="animation-delay:1.4s; font-size:1.1rem">🧵</text>
-        <text class="leaf-label" x="720" y="427" style="animation-delay:1.4s; font-size:10px; fill:#1C3A2B">Fashion</text>
-        <text class="leaf-sublabel" x="720" y="441" style="animation-delay:1.4s">Design</text>
-      </g>
-
-      <!-- Ground line -->
-      <line x1="60" y1="490" x2="800" y2="490" stroke="var(--tan)" stroke-width="0.8" opacity="0.5"
-            style="stroke-dasharray:4 6"/>
-
-    </svg>
   </div>
 
-  <!-- Tooltip -->
-  <div class="tooltip" id="tooltip">
-    <strong id="tooltip-title"></strong>
-    <span id="tooltip-desc"></span>
-  </div>
-
-  <!-- Detail cards -->
-  <div class="detail-cards">
-    <div class="detail-card">
-      <div class="detail-card-icon">🧗</div>
-      <h3>Rock Climbing</h3>
-      <p>Both bouldering and lead climbing — I love the physical puzzle of each route and the focus it demands. It keeps me strong, present, and never bored.</p>
-    </div>
-    <div class="detail-card">
-      <div class="detail-card-icon">✏️</div>
-      <h3>Drawing</h3>
-      <p>Sketching is how I slow down and observe. Figures, still life, or whatever catches my eye — drawing is a practice in attention as much as technique.</p>
-    </div>
-    <div class="detail-card">
-      <div class="detail-card-icon">🧵</div>
-      <h3>Fashion Design</h3>
-      <p>I design and make clothes as a creative outlet — thinking about silhouette, fabric, and how garments interact with the body and identity of the wearer.</p>
-    </div>
-  </div>
-
-  <footer>© 2025 Your Name &nbsp;·&nbsp; Built with GitHub Pages</footer>
-
-  <script>
-    const tooltip = document.getElementById('tooltip');
-    const tooltipTitle = document.getElementById('tooltip-title');
-    const tooltipDesc = document.getElementById('tooltip-desc');
-
-    document.querySelectorAll('.leaf-group').forEach(node => {
-      node.addEventListener('mouseenter', (e) => {
-        tooltipTitle.textContent = node.dataset.title || '';
-        tooltipDesc.textContent = node.dataset.desc || '';
-        tooltip.classList.add('show');
-      });
-      node.addEventListener('mousemove', (e) => {
-        tooltip.style.left = (e.clientX + 14) + 'px';
-        tooltip.style.top  = (e.clientY - 10) + 'px';
-      });
-      node.addEventListener('mouseleave', () => {
-        tooltip.classList.remove('show');
-      });
-    });
-  </script>
+  <footer>© 2025 Wenxin Zeng &nbsp;·&nbsp; Built with GitHub Pages</footer>
 
 </body>
 </html>
